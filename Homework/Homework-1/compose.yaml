@@ -1,0 +1,25 @@
+services:
+  pgsql15:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=dmadmin
+      - POSTGRES_PASSWORD=dmadmin
+      - POSTGRES_DB=ny_taxi
+    volumes:
+      - "/opt/postgres/hwdata:/var/lib/postgresql/data:rw"
+    ports:
+      - "5432:5432"
+    networks:
+      - hw-network
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=dmadmin@isonhaus.com
+      - PGADMIN_DEFAULT_PASSWORD=dmadmin
+    ports:
+      - "8080:80"
+    networks:
+      - hw-network
+
+networks:
+  hw-network:
